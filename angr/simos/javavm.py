@@ -17,7 +17,7 @@ class SimJavaVM(SimOS):
         if kwargs.get('os_name', None) is None:
             kwargs['os_name'] = self.name
 
-        state = SimState(**kwargs)
+        state = SimState(self.project, **kwargs)
 
         if addr is None: addr = self.project.entry
         state.regs._ip = addr
