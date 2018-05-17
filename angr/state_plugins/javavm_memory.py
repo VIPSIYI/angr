@@ -64,7 +64,7 @@ class SimJavaVmMemory(SimMemory):
     def copy(self):
         return SimJavaVmMemory(
             memory_id=self.id,
-            stack=self._stack[::],
+            stack=[stack_frame.copy() for stack_frame in self._stack],
             heap=self.heap.copy(),
             vm_static_table=self.vm_static_table.copy()
         )
