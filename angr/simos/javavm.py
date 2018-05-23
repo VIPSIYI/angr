@@ -51,7 +51,7 @@ class SimJavaVM(SimOS):
         # and return the reference
         size_ = len(args)
         type_ = "String"
-        local = SimSootValue_Local("param_0", type_)
+        local = SimSootValue_Local(state.project.entry.method.fullname, "param_0", type_)
         for idx, elem in enumerate(args):
             ref = SimSootValue_ArrayRef(idx, type_, local, size_)
             state.memory.store(ref, elem)
