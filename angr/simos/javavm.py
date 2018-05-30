@@ -1,4 +1,6 @@
 
+import claripy
+
 from archinfo.arch_soot import SootAddressTerminator
 
 from ..sim_state import SimState
@@ -9,8 +11,27 @@ from archinfo.arch_soot import SootAddressDescriptor, SootMethodDescriptor
 
 
 class SimJavaVM(SimOS):
+
     def __init__(self, *args, **kwargs):
         super(SimJavaVM, self).__init__(*args, name='JavaVM', **kwargs)
+
+    @staticmethod
+    def get_default_value_by_type(type_):
+        """
+        Java specify defaults values for initialized field based on the field type.
+        This method returns these default values given a type.
+        (https://blog.ajduke.in/2012/03/25/variable-initialization-and-default-values)
+
+        TODO: ask what to do for symbolic value and under constraint symbolic execution
+        :param type_: string represent the type name
+        :return: Default values specified for the type
+        """
+        if type_ == "int":
+            return claripy.BVV(0, 32)
+        elif type_ == "boolean":
+            return claripy.BoolV(False)
+        else:
+            return None
 
     def state_blank(self, addr=None, initial_prefix=None, stack_size=None, **kwargs):
         if kwargs.get('mode', None) is None:

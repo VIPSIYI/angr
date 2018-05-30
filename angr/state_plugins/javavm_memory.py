@@ -66,6 +66,8 @@ class SimJavaVmMemory(SimMemory):
             return cstack.load(addr.id, none_if_missing=True)
         elif type(addr) is SimSootValue_StaticFieldRef:
             return self.vm_static_table.load(addr.id, none_if_missing=True)
+        elif type(addr) is SimSootValue_InstanceFieldRef:
+            return self.heap.load(addr.id, none_if_missing=True)
         else:
             import ipdb; ipdb.set_trace()
 
