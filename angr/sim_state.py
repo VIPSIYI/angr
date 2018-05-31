@@ -294,6 +294,10 @@ class SimState(ana.Storable): # pylint: disable=R0904
     def callstack(self):
         return self.get_plugin('callstack')
 
+    @property
+    def javavm_classloader(self):
+        return self.get_plugin('javavm_classloader')
+
     def _inspect(self, *args, **kwargs):
         if self.has_plugin('inspector'):
             self.inspect.action(*args, **kwargs)
