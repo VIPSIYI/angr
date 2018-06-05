@@ -11,11 +11,6 @@ class SimSootStmt_Invoke(SimSootStmt):
         super(SimSootStmt_Invoke, self).__init__(stmt, state)
 
     def _execute(self):
-        invoke_target = resolve_method(self.state, self.stmt.invoke_expr)
-
-        # Initialize an invoke state, and set the arguments
-        self.state.scratch.invoke = True
-        self.state.scratch.invoke_target = invoke_target
-        self.state.scratch.invoke_expr = self.stmt.invoke_expr
+        self._translate_expr(self.stmt.invoke_expr)
 
 

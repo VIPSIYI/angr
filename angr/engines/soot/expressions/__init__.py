@@ -37,3 +37,4 @@ from .phi import SimSootExpr_Phi
 from .length import SimSootExpr_Length
 from .unsupported import SimSootExpr_Unsupported
 from .constants import *
+from .specialinvoke import SimSootExpr_SpecialInvoke
